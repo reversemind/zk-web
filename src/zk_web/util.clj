@@ -14,8 +14,8 @@
   [path]
   (let [path (if (empty? path) "/" path)
         path (if (and (.endsWith path "/") (> (count path) 1))
-               (apply str (drop-last path))
-               path)]
+      (apply str (drop-last path))
+      path)]
     path))
 
 (defn child-path
@@ -28,8 +28,8 @@
   [n]
   (apply str (repeat n "&nbsp;")))
 
-(defmacro when-admin [ & exprs ]
-  `(when (session/get :user)
+(defmacro when-admin [& exprs]
+  `(when (session/get :user )
      ~@exprs))
 
 (defn drop-last-while
@@ -38,13 +38,13 @@
   (loop [c coll]
     (let [tail (last c)]
       (if (and (not= 0 (count c)) (pred tail))
-       (recur (drop-last c))
-       c))))
+        (recur (drop-last c))
+        c))))
 
 (defn parent
   "Get parent's path"
   [path]
   (cond
-   (= path "/") "/"
-   :default (let [path (if (.endsWith path "/") (drop-last path) path)]
-              (apply str (drop-last-while #(not= % \/) path)))))
+    (= path "/") "/"
+    :default (let [path (if (.endsWith path "/") (drop-last path) path)]
+               (apply str (drop-last-while #(not= % \/) path)))))

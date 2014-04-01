@@ -7,7 +7,7 @@
   [path]
   (let [file (File. path)]
     (and (.exists file)
-         (.isFile file))))
+      (.isFile file))))
 
 (defn- load-conf-file [path]
   (when (valid-conf-file? path)
@@ -18,7 +18,7 @@
   (let [home-conf (str (get (System/getenv) "HOME") File/separator ".zk-web-conf.clj")
         pwd-conf "conf/zk-web-conf.clj"]
     (or (load-conf-file home-conf) (load-conf-file pwd-conf)
-        {
-         :server-port 8080
-         :users {"admin" "hello"}
-         })))
+      {
+        :server-port 8080
+        :users {"admin" "hello"}
+        })))
