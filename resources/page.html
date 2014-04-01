@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head><title>ZK-Web | Make zookeeper simpler</title>
+    <script src="/js/jquery.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.js" type="text/javascript"></script>
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container" style="padding:0px 0px 40px 0px;">
+    <div class="span12 page-header">
+        <div class="row">
+            <div class="span10">
+                <h1><a href="/">ZK-Web</a>
+                    <small>&nbsp;&nbsp;&nbsp;&nbsp;Make zookeeper simpler</small>
+                </h1>
+            </div>
+            <div class="span2">
+                <div><span class="badge">Guest</span><a href="/login"><span class="badge badge-success">Login</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="breadcrumb span12"><i class="icon-chevron-right"></i>
+            <li><a href="/node?path=/">localhost:2181/</a></li>
+            <i class="icon-chevron-right"></i>
+            <li><a href="/node?path=/baloo/">baloo</a></li>
+            <i class="icon-chevron-right"></i>
+            <li><a href="/node?path=/baloo/services/">services</a></li>
+            <i class="icon-chevron-right"></i>
+            <li><a href="/node?path=/baloo/services/HYPERGATE.ADDRESS/">HYPERGATE.ADDRESS</a></li>
+            <i class="icon-chevron-right"></i>
+            <li><a href="/node?path=/baloo/services/HYPERGATE.ADDRESS/012032c3-6fea-45cb-a529-fbd713284bf7/">012032c3-6fea-45cb-a529-fbd713284bf7</a>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="span4">
+                <ul class="nav nav-tabs nav-stacked">
+                    <div class="row">
+                        <div class="span3"><h3>Children</h3></div>
+                        <div class="span1"><span class="span1">&nbsp;</span><span
+                                class="label label-info pull-right">0</span></div>
+                    </div>
+                    <div class="alert">No children</div>
+                </ul>
+            </div>
+            <div class="span4">
+                <table class="table-striped table-bordered table">
+                    <tr><h3>Node Stat</h3></tr>
+                    <tr>
+                        <td>numChildren</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>ephemeralOwner</td>
+                        <td>91126716682866260</td>
+                    </tr>
+                    <tr>
+                        <td>cversion</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>mzxid</td>
+                        <td>68449318</td>
+                    </tr>
+                    <tr>
+                        <td>czxid</td>
+                        <td>68449318</td>
+                    </tr>
+                    <tr>
+                        <td>dataLength</td>
+                        <td>521</td>
+                    </tr>
+                    <tr>
+                        <td>ctime</td>
+                        <td>1396362884516</td>
+                    </tr>
+                    <tr>
+                        <td>version</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>aversion</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>mtime</td>
+                        <td>1396362884516</td>
+                    </tr>
+                    <tr>
+                        <td>pzxid</td>
+                        <td>68449318</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="span4">
+                <div class="row">
+                    <div class="span3"><h3>Node Data</h3></div>
+                    <div class="span1"><span class="span1">&nbsp;</span><span
+                            class="label label-info">521 byte(s)</span></div>
+                </div>
+                <div class="well"><p style="word-break:break-all;">
+                    {"name":"HYPERGATE.ADDRESS","id":"012032c3-6fea-45cb-a529-fbd713284bf7","address":"10.110.55.11","port":45215,"sslPort":null,"payload":{"@class":"com.reversemind.hypergate.servicediscovery.serializer.ServerMetadata","setName":"HYPERGATE.ADDRESS","instance":"012032c3-6fea-45cb-a529-fbd713284bf7","host":"10.110.55.11","port":45215,"metrics":{"startDate":1396345908863,"requests":583,"timePerRequest":17.406518010291595,"processingTime":10148.0,"cpuIdle":90.0}},"registrationTimeUTC":1396362884511,"serviceType":"DYNAMIC","uriSpec":null}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div></div>
+</div>
+</body>
+</html>

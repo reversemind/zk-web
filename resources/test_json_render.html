@@ -1,0 +1,49 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .renderjson a { text-decoration: none; }
+        .renderjson .disclosure { color: crimson;
+            font-size: 150%; }
+        .renderjson .syntax { color: grey; }
+        .renderjson .string { color: darkred; }
+        .renderjson .number { color: darkcyan; }
+        .renderjson .boolean { color: blueviolet; }
+        .renderjson .key    { color: darkblue; }
+        .renderjson .keyword { color: blue; }
+        .renderjson .object.syntax { color: lightseagreen; }
+        .renderjson .array.syntax  { color: orange; }
+    </style>
+    <title></title>
+</head>
+<body>
+<h1></h1>
+
+<div id="dest"></div>
+
+<script type="text/javascript" src="renderjson.js"></script>
+<script>
+    document.getElementById("dest").appendChild(
+            renderjson.set_show_by_default(true)
+                //.set_show_to_level(2)
+                //.set_icons('+', '-')
+            (
+// Examples from http://json.org/example.html
+                    {"name": "HYPERGATE.ADDRESS", "id": "012032c3-6fea-45cb-a529-fbd713284bf7", "address": "10.110.55.11", "port": 45215, "sslPort": null, "payload": {
+                        "@class": "com.reversemind.hypergate.servicediscovery.serializer.ServerMetadata",
+                        "setName": "HYPERGATE.ADDRESS",
+                        "instance": "012032c3-6fea-45cb-a529-fbd713284bf7",
+                        "host": "10.110.55.11",
+                        "port": 45215,
+                        "metrics": {
+                            "startDate": 1396345908863,
+                            "requests": 583,
+                            "timePerRequest": 17.406518010291595,
+                            "processingTime": 10148.0,
+                            "cpuIdle": 90.0
+                        }
+                    }, "registrationTimeUTC": 1396362884511, "serviceType": "DYNAMIC", "uriSpec": null}
+            ));
+</script>
+</body>
+</html>
