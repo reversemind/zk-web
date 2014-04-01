@@ -22,7 +22,7 @@
   [path]
   (let [node-seq (rest (str/split path #"/"))
         link-seq (reduce #(conj %1 (str (last %1) %2 "/"))
-      ["/"] node-seq)
+          ["/"] node-seq)
         node-seq (cons (session/get :addr ) node-seq)]
     [node-seq link-seq]))
 
@@ -53,10 +53,10 @@
   [:div.span12.page-header [:div.row [:div.span10 [:h1 (link-to "/" "ZK-Web")
                                                    [:small (space 4) "Make zookeeper simpler"]]]
                             [:div.span2 (if-let [user (session/get :user )]
-                              [:div [:span.badge.badge-info user]
-                               (link-to "/logout" [:span.badge.badge-error "Logout"])]
-                              [:div [:span.badge "Guest"]
-                               (link-to "/login" [:span.badge.badge-success "Login"])])]]
+                                          [:div [:span.badge.badge-info user]
+                                           (link-to "/logout" [:span.badge.badge-error "Logout"])]
+                                          [:div [:span.badge "Guest"]
+                                           (link-to "/login" [:span.badge.badge-success "Login"])])]]
    ])
 
 (defpartial footer []
@@ -65,12 +65,12 @@
 (defpartial admin-tool [path]
   [:div.navbar.navbar-fixed-bottom [:div.navbar-inner [:div.container [:a.brand {:href "#"} "Admin Tools"]
                                                        [:ul.nav (interleave
-                                                         [[:li [:a {:data-toggle "modal" :href "#createModal"} "Create"]]
-                                                          [:li [:a {:data-toggle "modal" :href "#editModal"} "Edit"]]
-                                                          [:li [:a {:data-toggle "modal" :href "#deleteModal"} "Delete"]]
-                                                          [:li [:a {:data-toggle "modal" :href "#rmrModal"} "RMR"]]]
-                                                         (repeat [:li.divider-vertical ])
-                                                         )]]
+                                                                  [[:li [:a {:data-toggle "modal" :href "#createModal"} "Create"]]
+                                                                   [:li [:a {:data-toggle "modal" :href "#editModal"} "Edit"]]
+                                                                   [:li [:a {:data-toggle "modal" :href "#deleteModal"} "Delete"]]
+                                                                   [:li [:a {:data-toggle "modal" :href "#rmrModal"} "RMR"]]]
+                                                                  (repeat [:li.divider-vertical ])
+                                                                  )]]
                                     ]])
 
 (defpartial layout [& content]
@@ -78,6 +78,7 @@
     [:head [:title "ZK-Web | Make zookeeper simpler"]
      (include-js "/js/jquery.js")
      (include-js "/js/bootstrap.js")
+     (include-js "/js/renderjson.js")
      (include-css "/css/bootstrap.css")]
     [:body [:div.container {:style "padding:0px 0px 40px 0px;"}
             (header)
@@ -89,12 +90,12 @@
 (defpartial nav-bar [path]
   (let [[node-seq link-seq] (nodes-parents-and-link path)]
     [:ul.breadcrumb.span12 (interleave (repeat [:i.icon-chevron-right ])
-      (map (fn [l n] [:li (node-link l n)]) link-seq node-seq))]))
+                             (map (fn [l n] [:li (node-link l n)]) link-seq node-seq))]))
 
 (defpartial node-children [parent children]
   (let [parent (if (.endsWith parent "/")
-    parent
-    (str parent "/"))]
+                 parent
+                 (str parent "/"))]
     [:div.span4 [:ul.nav.nav-tabs.nav-stacked [:div.row [:div.span3 [:h3 "Children"]]
                                                [:div.span1 [:span.span1 (space 1)]
                                                 [:span.label.label-info.pull-right (count children)]]]
@@ -110,15 +111,29 @@
                        [:td (last kv)]])
                  stat)]])
 
+(defpartial node-stat-2 [stat]
+  [:div.span8 [:div.row [:div.span3 [:h3 "Node Stat"]]]
+           [:div.well {:id "json_data_stat"}
+           [:span (str " " stat)]
+            [:script
+             (str "document.getElementById(\"json_data_stat\").appendChild(renderjson.set_show_by_default(true)(" (str/replace (str/replace stat #", :" ",") #" " ":") "));"  )
+             ]
+            ]
+   ])
+
+
 (defpartial node-data [path data]
-  [:div.span4 [:div.row [:div.span3 [:h3 "Node Data"]]
+  [:div.span12 [:div.row [:div.span3 [:h3 "Node Data"]]
                [:div.span1 [:span.span1 (space 1)]
                 [:span.label.label-info (count data) " byte(s)"]]]
 
    (if (nil? data)
      [:div.alert.alert-error "God, zookeeper returns NULL!"]
-     [:div.well [:p {:style "word-break:break-all;"}
-                 (str/replace (bytes->str data) #"\n" "<br>")]])])
+     [:div.well {:id "json_data"}
+         [:script
+            (str "document.getElementById(\"json_data\").appendChild(renderjson.set_show_by_default(true)(" (bytes->str data) "));"  )
+          ]
+        ])])
 
 (defpartial create-modal [path]
   [:div#createModal.modal.hide.fade [:div.modal-header [:h4 "Create A Child"]]
@@ -192,7 +207,7 @@
               data (zk/get cli path)]
           [:div (nav-bar path)
            [:div.row (node-children path children)
-            (node-stat stat)
+            (node-stat-2 stat)
             (node-data path data)]
            (when-admin
              [:div#adminZone (admin-tool path)
