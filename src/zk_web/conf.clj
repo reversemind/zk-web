@@ -22,3 +22,10 @@
         :server-port 8080
         :users {"admin" "hello"}
         })))
+
+(defn load_conf_strait []
+  {:server-port 8080
+   :users {"admin" "hello"}
+   :default-node "localhost:12181/"
+   }
+  )

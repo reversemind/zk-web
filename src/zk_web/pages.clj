@@ -124,16 +124,16 @@
 
 (defpartial node-data [path data]
   [:div.span12 [:div.row [:div.span3 [:h3 "Node Data"]]
-               [:div.span1 [:span.span1 (space 1)]
-                [:span.label.label-info (count data) " byte(s)"]]]
+                [:div.span1 [:span.span1 (space 1)]
+                 [:span.label.label-info (count data) " byte(s)"]]]
 
    (if (nil? data)
      [:div.alert.alert-error "God, zookeeper returns NULL!"]
      [:div.well {:id "json_data"}
-         [:script
-            (str "document.getElementById(\"json_data\").appendChild(renderjson.set_show_by_default(true)(" (bytes->str data) "));"  )
-          ]
-        ])])
+      (if (> (count (bytes->str data)) 0)
+        [:script (str "document.getElementById(\"json_data\").appendChild(renderjson.set_show_by_default(true)(" (bytes->str data) "));")]
+        [:span (str "-")])])
+   ])
 
 (defpartial create-modal [path]
   [:div#createModal.modal.hide.fade [:div.modal-header [:h4 "Create A Child"]]
